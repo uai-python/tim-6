@@ -49,10 +49,10 @@ DROP TABLE IF EXISTS `question`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
   `idquestion` int(11) NOT NULL AUTO_INCREMENT,
-  `question` varchar(200) NOT NULL,
+  `question` longtext NOT NULL,
   `answer` varchar(30) NOT NULL,
   PRIMARY KEY (`idquestion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +61,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (1,'Jumlah Kematian Akibat Bunuh Diri ditahun 2015','16'),(2,'Berapakah angka pengguna penyalahgunaan narkotika di daerah Jakarta Selatan ?','465'),(3,'Berapa jumlah guru SD Perempuan di Jakarta Timur pada tahun 2015 ?','8898'),(4,'Jumlah siswa SMK putus sekolah terbesar di DKI jakarta','Jakarta Timur 430 Siswa'),(5,'Penyebab Kematian Ibu DKI Jakarta','1'),(6,'Jumlah Halte Busway DKI Jakarta Pada Tahun 2011','207');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,4 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-28 16:37:32
+-- Dump completed on 2017-03-28 19:49:01
