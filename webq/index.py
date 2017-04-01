@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, url_for, request, escape
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
-
+from sqlalchemy import func
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -27,17 +27,25 @@ class Guest(db.Model):
     def __repr__(self):
         return '<Guest %r>' % self.user
 
+class Question(db.Model):
+    __tablename__ = 'question'
+
+    idquestion = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String)
+    answer = db.Column(db.String(30))
+
+    def __init__(self, question, answer):
+        self.question = question
+        self.answer = answer
+
+    def __repr__(self):
+        return '<Question %r>' % self.question
+
 @app.route('/', methods=['GET','POST'])
 def index():
     if 'user' in session:
-        db = mysql.connector.connect(host='localhost', port='3306', database='webq', user='root', password='0110')
-        cursor = db.cursor()
-        cursor.execute("SELECT question FROM question ORDER BY RAND() LIMIT 1")
-        data = cursor.fetchall()
-
-        username_session = escape(session['user']).capitalize()
-        number = 0
-        return render_template('web.html', user=username_session, data = data, number = number + 1)
+        fetch_data = Question.query.order_by(func.rand()).limit(1).all()
+        return render_template('web.html', data=fetch_data)
     else:
         return redirect(url_for("login"))
 
@@ -66,14 +74,14 @@ def logout():
 
 @app.route('/result', methods=['POST', 'GET'])
 def result():
-    return render_template('result.html', title='Quiz')
+    return render_template('dashboard.html', title='Dashboard')
 
 @app.errorhandler(404)
 def not_found(error):
     return 'Page not found!', 404
 
 # set the secret key.  keep this really secret:
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.secret_key = 'Apa_hayo'
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

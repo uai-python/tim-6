@@ -20,19 +20,23 @@
         <table border="0" align="center">
               <form method="post">
                   <tr>
-                    <td>User</td>
-                    <td><input type="text" name="user" class="form-control" placeholder="Panggilan/Samaran"></td>
+                    <td>Nama</td>
+                    <td><input type="text" name="user" class="form-control" placeholder="Panggilan/Samaran" required oninvalid="this.setCustomValidity('Nama Harus Diisi')"
+                                                   oninput="setCustomValidity('')"></td>
                 </tr>
 
                 <tr>
                     <td>Usia Anda</td>
-                    <td><input type="text" name="usia" class="form-control" placeholder="Usia"></td>
+                    <td><input type="text" name="usia" class="form-control" placeholder="Usia" required oninvalid="this.setCustomValidity('Usia Tidak Boleh Kosong')"
+                                                   oninput="setCustomValidity('')"></td>
                 </tr>
 
                 <tr>
                     <td>Jenis Kelamin</td>
                     <td>
-                        <select name="jenis_kelamin" class="form-control">
+                        <select name="jenis_kelamin" class="form-control" required oninvalid="this.setCustomValidity('Pilih Jenis Kelamin dulu')"
+                                                   oninput="setCustomValidity('')">
+                            <option value="">--Pilih--</option>
                             <option value="Laki - Laki">Laki - Laki</option>
                             <option value="Perempuan">Perempuan</option>
                             <option value="Lainnya">Lainnya</option>
@@ -42,7 +46,9 @@
                 <tr>
                     <td>Kota / Kabupaten</td>
                     <td>
-                        <select name="kota" class="form-control">
+                        <select name="kota" class="form-control" required oninvalid="this.setCustomValidity('Username / Email Tidak Boleh kosong')"
+                                                   oninput="setCustomValidity('')">
+                            <option value="">--Pilih--</option>
                             <option value="Jakarta Selatan">Jakarta Selatan</option>
                             <option value="Jakarta Utara">Jakarta Utara</option>
                             <option value="Jakarta Barat">Jakarta Barat</option>

@@ -12,15 +12,19 @@
         {% if user %}
                     <p>Hello <b>{{ user }}</b></p>
         {% endif %}
-
-        {% if data %}
-            <h2>{{ data }}</h2>
-        {% endif %}
-
         <hr/>
+        {% for data in data %}
+            <h3>{{ data.question }} || {{ data.answer }}</h3>
+        {% endfor %}
+        <hr/>
+
+        {% for b in range(5) %}
+            <br>
+        {% endfor %}
+
         <form method="post">
             <div class="col-xs-4">
-                    <input type="range" name="range" min="1" max="100" value="50" onchange="rangePrimary.value=value">
+                    <input type="range" name="range" min="1" max="100" value="50" onchange="rangePrimary.value=value">Jawaban Anda :
                     <output id="rangePrimary">50</output>
             </div>
             <div class="col-xs-2">
