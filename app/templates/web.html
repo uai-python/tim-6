@@ -14,7 +14,10 @@
         {% endif %}
         <hr/>
         {% for data in data %}
-            <h3>{{ data.question }} || {{ data.answer }}</h3>
+            <h3>{{ data.question }}</h3>
+        {% if request.method == 'POST' and data.answer != request.form['answer'] %}
+            <span style="background-color: red">Jawaban yang benar adalah : {{ data.answer }}</span>
+        {% endif %}
         {% endfor %}
         <hr/>
 
@@ -22,10 +25,12 @@
             <br>
         {% endfor %}
 
-        <form method="post">
+
+        <form method="post" action="/">
             <div class="col-xs-4">
-                    <input type="range" name="range" min="1" max="100" value="50" onchange="rangePrimary.value=value">Jawaban Anda :
+                    <input type="range" name="answer" min="1" max="10000" value="50" onchange="rangePrimary.value=value">Jawaban Anda :
                     <output id="rangePrimary">50</output>
+                    <input type="text" name="jawaban" value={% if data %} {{data.answer}} {% endif %}>
             </div>
             <div class="col-xs-2">
                 <button type="submit" class="btn btn-default">Periksa Hasil</button>
