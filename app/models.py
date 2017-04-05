@@ -32,3 +32,23 @@ class Question(db.Model):
 
     def __repr__(self):
         return '<Question %r>' % self.question
+
+class Quiz(db.Model):
+    __tablename__ = 'quiz'
+
+    idquiz = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(45))
+    jumlah_soal = db.Column(db.String(45))
+    WaktuMasuk = db.Column(db.String(45))
+    WaktuAkhir = db.Column(db.String(45))
+    score = db.Column(db.String(45))
+
+    def __init__(self, user, jumlah_soal, WaktuMasuk, WaktuAkhir, score):
+        self.user = user
+        self.jumlah_soal = jumlah_soal
+        self.WaktuMasuk = WaktuMasuk
+        self.WaktuAkhir = WaktuAkhir
+        self.score = score
+
+    def __repr__(self):
+        return '<Quiz %r>' % self.user
