@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Statistic</title>
 </head>
 <body>
     <center>
-        <h3>Total Waktu Quiz : </h3>
-        <h3>Score Quiz : </h3>
-
-        <a href="logout"><button type="submit" name="logout" value="logout" class="btn btn-default">Keluar</button></a>
+        {% for data in data %}
+            <h2>Rata - rata soal terjawab : {{ data.jumlah_soal }} </h2>
+            <h2>Rata - rata Jawaban benar : {{ data.score }} </h2>
+            <h2>Rata - rata Waktu : {{ data.WaktuMasuk }} </h2>
+        {% endfor %}
     </center>
+
+<a href="login" >Login</a>
+
 </body>
 </html>

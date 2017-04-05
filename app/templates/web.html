@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<script type="text/javascript">
+    window.setTimeout("waktu()",1000);
+    function waktu() {
+        var tanggal = new Date();
+        setTimeout("waktu()",1000);
+        document.getElementById("jam").innerHTML = tanggal.getHours();
+        document.getElementById("menit").innerHTML = tanggal.getMinutes();
+        document.getElementById("detik").innerHTML = tanggal.getSeconds();
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <title>Quiz</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body>
+<style>
+    #jam-digital{overflow:hidden; width:350px}
+    #hours{float:left; width:100px; height:50px; background-color:#6B9AB8; margin-right:25px}
+    #minute{float:left; width:100px; height:50px; background-color:#A5B1CB}
+    #second{float:right; width:100px; height:50px; background-color:#FF618A; margin-left:25px}
+    #jam-digital p{color:#FFF; font-size:36px; text-align:center; margin-top:4px}
+</style>
+<body onLoad="waktu()">
+    <div id="jam-digital">
+        <div id="hours"><p id="jam"></p></div>
+        <div id="minute"><p id="menit"></p></div>
+        <div id="second"><p id="detik"></p></div>
+    </div>
 <h2 align="center">Quiz {% if number %} {{number}} {% endif %}</h2>
     <div class="container">
         {% if user %}
-                    <p>Hello <b>{{ user }}</b></p>
+            <p>Hello <b>{{ user }}</b></p>
         {% endif %}
+            <p>Total Soal <b>{{ Total_Soal }}</b></p>
+            <p>Total Jawaban Benar <b>{{ Total_jawab_benar }}</b></p>
+
+
         <hr/>
+
         {% for data in data %}
             <h3>{{ data.question }}</h3>
-        {% if request.method == 'POST' and data.answer != request.form['answer'] %}
-            <span style="background-color: red">Jawaban yang benar adalah : {{ data.answer }}</span>
-        {% endif %}
         {% endfor %}
         <hr/>
 
@@ -25,12 +49,17 @@
             <br>
         {% endfor %}
 
-
-        <form method="post" action="/">
+        <form name="cek" method="post" action="cek">
             <div class="col-xs-4">
-                    <input type="range" name="answer" min="1" max="10000" value="50" onchange="rangePrimary.value=value">Jawaban Anda :
+                    <input type="range" name="answer" min="1" max="20000" value="50" onchange="rangePrimary.value=value">Jawaban Anda :
                     <output id="rangePrimary">50</output>
-                    <input type="text" name="jawaban" value={% if data %} {{data.answer}} {% endif %}>
+                        <input type="hidden" name="soal_ke" value="{{ Total_Soal }}">
+
+                    {% for data in data %}
+                        <input type="hidden" name="jawaban" value='{{ data.answer }}'>
+                        <input type="hidden" name="pertanyaan" value='{{ data.question }}'>
+                    {% endfor %}
+
             </div>
             <div class="col-xs-2">
                 <button type="submit" class="btn btn-default">Periksa Hasil</button>
@@ -38,7 +67,9 @@
         </form>
 
         <a href="logout"><button type="submit" name="logout" value="logout" class="btn btn-default">Keluar</button></a>
-        <a href="result"><button type="submit" name="logout" value="logout" class="btn btn-default">Akhiri Quiz</button></a>
+
+
+        <a href="cek"><button type="submit" name="akhiri" value="akhiri" class="btn btn-default">Akhiri Quiz</button></a>
 
     </div>
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cek Hasil</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<h2 align="center">Quiz</h2>
+    <div class="container">
+        {% if user %}
+            <p>Hello <b>{{ user }}</b></p>
+        {% endif %}
+
+        <p>{{ timestamp }}</p>
+
+        <p>Total Soal <b>{{ jumlah }}</b></p>
+        <p>Total Jawaban Benar <b>{{ hasil }}</b></p>
+
+        <hr/>
+
+        <h3>{{ ask }}</h3>
+        <span style="background-color: lightgreen">Jawaban Anda : {{ jawab_user }}</span>
+        <span style="background-color: lightcoral">Jawaban yang benar adalah : {{ jawab_asli }}</span>
+
+        <hr/>
+        <form method="post" action="link">
+            <input type="hidden" name="hasil" value="{{ hasil }}">
+            <input type="hidden" name="total" value="{{ jumlah }}">
+            <button type="submit" name="next" value="Pertanyaan Selanjutnya" class="btn btn-default">Pertanyaan Selanjutnya</button>
+        </form>
+    </div>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>
